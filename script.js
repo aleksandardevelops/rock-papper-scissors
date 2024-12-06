@@ -12,8 +12,8 @@ function getComputerChoice() {
     computerChoice = 'rock';
     console.log('Computer: rock');
   } else if (computerChoice === 2) {
-    computerChoice = 'papper';
-    console.log('Computer: papper');
+    computerChoice = 'paper';
+    console.log('Computer: paper');
   } else {
     computerChoice = 'scissors';
     console.log('Computer: scissors');
@@ -29,18 +29,26 @@ function playRound() {
   getComputerChoice();
   getHumanChoice();
 
+  if (
+    humanChoice !== 'rock' &&
+    humanChoice !== 'paper' &&
+    humanChoice !== 'scissors'
+  ) {
+    console.log('Check spelling! Choose: Rock, Paper or Scissors');
+  }
+
   switch (true) {
-    case computerChoice === 'rock' && humanChoice === 'papper':
-    case computerChoice === 'scissor' && humanChoice === 'rock':
-    case computerChoice === 'papper' && humanChoice === 'scissor':
-      humanScore = humanScore++;
+    case computerChoice === 'rock' && humanChoice === 'paper':
+    case computerChoice === 'scissors' && humanChoice === 'rock':
+    case computerChoice === 'paper' && humanChoice === 'scissors':
+      humanScore++;
       console.log('Human wins!');
       break;
 
-    case humanChoice === 'rock' && computerChoice === 'papper':
-    case humanChoice === 'scissor' && computerChoice === 'rock':
-    case humanChoice === 'papper' && computerChoice === 'scissor':
-      computerChoice = computerScore++;
+    case humanChoice === 'rock' && computerChoice === 'paper':
+    case humanChoice === 'scissors' && computerChoice === 'rock':
+    case humanChoice === 'paper' && computerChoice === 'scissors':
+      computerScore++;
       console.log('Computer wins!');
       break;
 
@@ -48,6 +56,9 @@ function playRound() {
       console.log("It's a tie");
       break;
   }
+
+  console.log(`Human has a score of ${humanScore}`);
+  console.log(`Computer has a score of ${computerScore}`);
 }
 
 playRound();
