@@ -1,25 +1,53 @@
 let humanScore = 0;
 let computerScore = 0;
 
+let computerChoice = undefined;
+let humanChoice = undefined;
+
 function getComputerChoice() {
-  let computerChoice = Math.floor(Math.random() * 3) + 1;
+  computerChoice = Math.floor(Math.random() * 3) + 1;
   console.log(computerChoice);
 
   if (computerChoice === 1) {
-    console.log('Computer: Rock');
+    computerChoice = 'rock';
+    console.log('Computer: rock');
   } else if (computerChoice === 2) {
-    console.log('Computer: Papper');
+    computerChoice = 'papper';
+    console.log('Computer: papper');
   } else {
-    console.log('Computer: Scissors');
+    computerChoice = 'scissors';
+    console.log('Computer: scissors');
   }
 }
 
-getComputerChoice();
-
 function getHumanChoice() {
-  let humanChoice = prompt('Enter your choice');
+  humanChoice = prompt('Enter your choice').toLowerCase();
+  console.log(`Human:${humanChoice}`);
 }
 
-getHumanChoice();
+function playRound() {
+  getComputerChoice();
+  getHumanChoice();
 
-function playRound() {}
+  switch (true) {
+    case computerChoice === 'rock' && humanChoice === 'papper':
+    case computerChoice === 'scissor' && humanChoice === 'rock':
+    case computerChoice === 'papper' && humanChoice === 'scissor':
+      humanScore = humanScore++;
+      console.log('Human wins!');
+      break;
+
+    case humanChoice === 'rock' && computerChoice === 'papper':
+    case humanChoice === 'scissor' && computerChoice === 'rock':
+    case humanChoice === 'papper' && computerChoice === 'scissor':
+      computerChoice = computerScore++;
+      console.log('Computer wins!');
+      break;
+
+    case humanChoice === computerChoice:
+      console.log("It's a tie");
+      break;
+  }
+}
+
+playRound();
