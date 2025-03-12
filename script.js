@@ -4,6 +4,14 @@ let computerScore = 0;
 let computerChoice = undefined;
 let humanChoice = undefined;
 
+const rockButton = document.querySelector('.rock');
+const paperButton = document.querySelector('.paper');
+const scissorsButton = document.querySelector('.scissors');
+
+rockButton.addEventListener('click', playRound);
+paperButton.addEventListener('click', playRound);
+scissorsButton.addEventListener('click', playRound);
+
 function getComputerChoice() {
   computerChoice = Math.floor(Math.random() * 3) + 1;
   console.log(computerChoice);
@@ -21,7 +29,10 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-  humanChoice = prompt('Enter your choice').toLowerCase();
+  humanChoice =
+    rockButton.textContent ||
+    paperButton.textContent ||
+    scissorsButton.textContent;
   console.log(`Human:${humanChoice}`);
 }
 
