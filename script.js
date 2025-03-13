@@ -4,41 +4,62 @@ let computerScore = 0;
 let computerChoice = undefined;
 let humanChoice = undefined;
 
+scoreDisplayContainer = document.querySelector('.score-display');
+const computerText = document.createElement('p');
+scoreDisplayContainer.appendChild(computerText);
+const humanText = document.createElement('p');
+scoreDisplayContainer.appendChild(humanText);
+const scoreStatus = document.createElement('p');
+scoreDisplayContainer.appendChild(scoreStatus);
+
 const rockButton = document.querySelector('.rock');
 const paperButton = document.querySelector('.paper');
 const scissorsButton = document.querySelector('.scissors');
 
+rockButton.addEventListener('click', () => {
+  humanChoice = 'rock';
+  humanText.textContent = 'Human: rock';
+});
 rockButton.addEventListener('click', playRound);
+
+paperButton.addEventListener('click', () => {
+  humanChoice = 'paper';
+  humanText.textContent = 'Human: paper';
+});
 paperButton.addEventListener('click', playRound);
+
+scissorsButton.addEventListener('click', () => {
+  humanChoice = 'scissors';
+  humanText.textContent = 'Human: scissors';
+});
 scissorsButton.addEventListener('click', playRound);
 
 function getComputerChoice() {
   computerChoice = Math.floor(Math.random() * 3) + 1;
-  console.log(computerChoice);
 
   if (computerChoice === 1) {
     computerChoice = 'rock';
-    console.log('Computer: rock');
+    computerText.textContent = 'Computer: rock';
   } else if (computerChoice === 2) {
     computerChoice = 'paper';
-    console.log('Computer: paper');
+    computerText.textContent = 'Computer: paper';
   } else {
     computerChoice = 'scissors';
-    console.log('Computer: scissors');
+    computerText.textContent = 'Computer: scissors';
   }
 }
 
-function getHumanChoice() {
-  humanChoice =
-    rockButton.textContent ||
-    paperButton.textContent ||
-    scissorsButton.textContent;
-  console.log(`Human:${humanChoice}`);
-}
+// function getHumanChoice() {
+//   humanChoice =
+//     rockButton.textContent ||
+//     paperButton.textContent ||
+//     scissorsButton.textContent;
+//   console.log(`Human:${humanChoice}`);
+// }
 
 function playRound() {
   getComputerChoice();
-  getHumanChoice();
+  // getHumanChoice();
 
   if (
     humanChoice !== 'rock' &&
@@ -68,8 +89,5 @@ function playRound() {
       break;
   }
 
-  console.log(`Human has a score of ${humanScore}`);
-  console.log(`Computer has a score of ${computerScore}`);
+  scoreStatus.innerHTML = `Human score: ${humanScore} <br> Computer score: ${computerScore}`;
 }
-
-playRound();
